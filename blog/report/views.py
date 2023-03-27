@@ -1,4 +1,5 @@
-from flask import Blueprint
+from flask import Blueprint, render_template, redirect
+
 
 report = Blueprint('report', __name__, url_prefix='/reports', static_folder='../static')
 # the Blueprint will be registered in app.py
@@ -8,4 +9,5 @@ report = Blueprint('report', __name__, url_prefix='/reports', static_folder='../
 
 @report.route('/')
 def report_list():
-    return 'Hello_report'
+    # return 'Hello_report'
+    return render_template('reports/list.html', reports=[1, 2, 3, 4, 5])

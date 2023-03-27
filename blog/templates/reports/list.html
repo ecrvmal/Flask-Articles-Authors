@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Users list
+Reports list
 {% endblock %}
 
 {% block body %}
@@ -9,11 +9,10 @@ Users list
     <div class="row justify-content-start">
         <div class="col-4">
             <a href="{{ url_for('report.report_list') }}"> reports </a>
-            <h1>Users</h1>
+            <h1>Reports</h1>
             <ul>
-                {% for user_id in users %}
-                    {#  <li>{{ users[user_id] }}</li> #}
-                    <li><a href="{{ url_for('user.get_user',pk=user_id) }}"> {{ users[user_id] }}</a></li>
+                {% for report in reports %}
+                     <li>{{ report }}</li>
                 {% endfor %}
             </ul>
         </div>
