@@ -1,28 +1,27 @@
-# -------------------------------------------------
-# Config as object
-# -------------------------------------------------
-# class Config:
-#     DEBUG = False,
-#     DATABASE_URI = 'sqlite:////tmp/test.db'
-#
-#
-# class Development(Config):
-#     DEBUG = True,
-#     DATABASE_URI = 'sqlite:////tmp/test.db'
-#
-#
-# class Production:
-#     DEBUG = False
-#
-# -------------------------------------------------
-# below config as file
-# -------------------------------------------------
-#import os
-TESTING = True
-DEBUG = True
-# DATABASE_URI = os.getenv('DATABASE_URI')
-DATABASE_URI = 'sqlite////tmp/test.db'
-FLASK_ENV = 'development'
-SECRET_KEY = "osk$nc3e-o#)(imn3@eufenq4zcbj-bh!j$r+=+r5k)plr69)r"   # https://djecrety.ir/
+import os
+from dotenv import load_dotenv
+from blog.enums import EnvType
 
+load_dotenv()
+
+ENV = os.getenv('FLASK_ENV', default=EnvType.production)
+DEBUG = ENV == EnvType.development
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+
+
+class BaseConfig:
+    DEBUG = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+class DevelopmentConfig(BaseConfig):
+    DEBUG = True
+
+class TestingConfiguration(BaseConfig):
+    pass
+
+class ProductionConfig(BaseConfig):
+    DEBUG = False
 
