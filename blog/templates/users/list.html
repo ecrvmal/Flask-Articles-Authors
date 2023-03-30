@@ -11,11 +11,10 @@ Users list
             <a href="{{ url_for('report.report_list') }}"> reports </a>
             <h1>Users</h1>
             <ul>
-                {% for user_id in users %}
-                    {#  <li>{{ users[user_id] }}</li> #}
-                    <li><a href="{{ url_for('user.get_user',pk=user_id) }}"> {{ users[user_id] }}</a></li>
+                {% for user in users %}
+                    <li>  {{ user.id }} {{ user.username }} {{ user.email }} </li>
                 {% endfor %}
-            </ul>
+                </ul>
         </div>
     </div>
 </div>

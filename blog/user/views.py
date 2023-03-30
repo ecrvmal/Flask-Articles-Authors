@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect
+
 from werkzeug.exceptions import NotFound
 
 user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static')
@@ -6,26 +7,28 @@ user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static
 # when request  localhost/users   > goes to the Bluepront (url_prefix param)
 # when request  localhost/users   > goes to function under @user.route('/')
 
-USERS = {1: 'Alice', 2: 'John', 3: 'Mike'}
+# USERS = {1: 'Alice', 2: 'John', 3: 'Mike'}
 
 
 @user.route('/')
 def user_list():
+    from blog.models import User
+    users = User.query.all()
     return render_template(
         'users/list.html',
-        users=USERS,
+        users=users,
     )
 
 
-
 @user.route('/<int:pk>')
-def get_user(pk: int):
-    try:
-        user_name = USERS[pk]
-    except KeyError:
-        # raise NotFound(f'user id {pk} not found')      # change error message
+def profile(pk: int):
+    from blog.models import User
+
+    _user = User.query.filter_by(id=pk).one_or_none()
+    if not _user:
+        raise NotFound(f'user id {pk} not found')      # change error message
         return redirect('/users/')                       # or make action  (redirect) on error
     return render_template(
-        'users/details.html',
-        user_name=user_name,     # possible to pass any variables. objects
+        'users/profile.html',
+        user=_user,     # possible to pass any variables. objects
     )
