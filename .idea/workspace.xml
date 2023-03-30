@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="596847fa-738d-481e-8d27-115daedc9087" name="Changes" comment="" />
+    <list default="true" id="596847fa-738d-481e-8d27-115daedc9087" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/lesson_4/.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/auth/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/auth/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/extensions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/static/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/static/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/templates/auth/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/templates/users/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/templates/users/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/user/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/blog/user/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/example.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/migrations/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/migrations/alembic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/migrations/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/migrations/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/migrations/versions/2f15772923f5_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_4/wsgi.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
