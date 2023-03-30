@@ -14,15 +14,15 @@ def login():
             'auth/login.html'
         )
 
-    email = request.form.get('email')        # get data from form, fill dict
+    username = request.form.get('username')        # get data from form, fill dict
     password = request.form.get('password')        # get data from form, fill dic
 
     from blog.models import User
 
-    user = User.query.filter_by(email=email).first()
-    print('user',user)
-    print('password',password)
-    print('check passw ', check_password_hash(user.password, password))
+    user = User.query.filter_by(username=username).first()
+    # print('user',user)
+    # print('password',password)
+    # print('check passw ', check_password_hash(user.password, password))
 
     if not user or not check_password_hash(user.password, password):
         flash('Please Check Username and Password')
