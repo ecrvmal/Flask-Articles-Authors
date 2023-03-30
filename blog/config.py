@@ -10,18 +10,6 @@ DEBUG = ENV == EnvType.development
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-
-class BaseConfig:
-    DEBUG = False
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-class DevelopmentConfig(BaseConfig):
-    DEBUG = True
-
-class TestingConfiguration(BaseConfig):
-    pass
-
-class ProductionConfig(BaseConfig):
-    DEBUG = False
 
