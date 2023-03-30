@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import logout_user
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
 
 
@@ -28,10 +28,13 @@ def login():
         flash('Please Check Username and Password')
         return redirect(url_for('.login'))
 
+    login_user(user)
+    flash('Logged in successfully.')
     return redirect(url_for('user.user_list'))
 
 
 @auth.route('/logout')    # route registration
+#@login_required
 def logout():
     logout_user()
     return redirect(url_for('.login'))

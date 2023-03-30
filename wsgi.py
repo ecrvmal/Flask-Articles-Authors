@@ -14,18 +14,21 @@ def init_db():
 def create_user():
     from blog.models import User
     db.session.add(
-        User(username='user2', email='name2@email.com', password=generate_password_hash('123'))
+        User(username='user1', email='user1@mail.com', password=generate_password_hash('123'))
     )
     db.session.add(
-        User(username='user3', email='name3@email.com', password=generate_password_hash('123'))
+        User(username='user2', email='user2@mail.com', password=generate_password_hash('123'))
     )
     db.session.add(
-        User(username='user4', email='name4@email.com', password=generate_password_hash('123'))
+        User(username='user3', email='user3@mail.com', password=generate_password_hash('123'))
     )
     db.session.add(
-        User(username='user5', email='name5@email.com', password=generate_password_hash('123'))
+        User(username='user4', email='user4@mail.com', password=generate_password_hash('123'))
     )
     db.session.add(
-        User(username='user6', email='name6@email.com', password=generate_password_hash('123'))
+        User(username='user5', email='user5@mail.com', password=generate_password_hash('123'))
+    )
+    db.session.add(
+        User(username='user6', email='username6@mail.com', password=generate_password_hash('123'))
     )
     db.session.commit()

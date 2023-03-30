@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import logout_user, login_manager
 from flask_login import LoginManager, logout_user
@@ -32,6 +32,10 @@ def create_app() -> Flask:
     @login_manager.user_loader
     def load_user(user_id):
         User.query.get(int(user_id))
+
+    @login_manager.unauthorized_handler
+    def unauthorized():
+        return redirect(url_for("auth.login"))
 
     register_blueprint(app)
     return app

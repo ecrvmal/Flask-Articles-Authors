@@ -3,7 +3,7 @@
 {% block title %}User details{% endblock %}
 
 {% block body %}
-<h1> {{ user.id }} {{ user.username }}  {{ user.email }}</h1>
+<h1> {{ user.id }} {{ user.username }}  {{ user.email }} {{ user.is_authenticated }}</h1>
 {% endblock %}
 
 {% block js %}  {% endblock %}
