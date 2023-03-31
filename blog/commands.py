@@ -20,7 +20,13 @@ def create_init_user():
     from wsgi import app
 
     with app.app_context():
+        # db.session.add(
+        #     User(email='name@example.com', password=generate_password_hash('test123'))
+        # )
         db.session.add(
-            User(email='name@example.com', password=generate_password_hash('test123'))
+            User(email='user@mail.ru', password=generate_password_hash('123'))
+        )
+        db.session.add(
+            User(email='user1@mail.ru', password=generate_password_hash('123'))
         )
         db.session.commit()

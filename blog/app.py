@@ -3,6 +3,7 @@ from flask import Flask
 from blog import commands
 from blog.extensions import db, login_manager
 from blog.models import User
+from blog import config
 
 
 def create_app() -> Flask:
