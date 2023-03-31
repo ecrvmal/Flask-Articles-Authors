@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import logout_user, login_manager
-from flask_login import LoginManager, logout_user
+from flask_login import logout_user, LoginManager
+
 
 from blog.report.views import report
 from blog.user.views import user
@@ -11,7 +11,6 @@ from blog.auth.view import auth
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-
 
 
 def create_app() -> Flask:
@@ -31,7 +30,7 @@ def create_app() -> Flask:
 
     @login_manager.user_loader
     def load_user(user_id):
-        User.query.get(int(user_id))
+        return User.query.get(int(user_id))
 
     @login_manager.unauthorized_handler
     def unauthorized():

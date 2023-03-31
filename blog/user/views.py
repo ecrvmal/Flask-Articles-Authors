@@ -11,7 +11,7 @@ user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static
 
 
 @user.route('/')
-# @login_required
+@login_required
 def user_list():
     from blog.models import User
     users = User.query.all()
@@ -22,7 +22,7 @@ def user_list():
 
 
 @user.route('/<int:pk>')
-# @login_required
+@login_required
 def profile(pk: int):
     from blog.models import User
 

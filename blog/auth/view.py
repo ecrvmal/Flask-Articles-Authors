@@ -34,7 +34,7 @@ def login():
 
 
 @auth.route('/logout')    # route registration
-#@login_required
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('.login'))
