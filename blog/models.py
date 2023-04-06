@@ -7,6 +7,8 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'  # optional
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), unique=True)
+    first_name = db.Column(db.String(255))
+    last_name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     birth_year = db.Column(db.Integer)
