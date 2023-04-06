@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(255), unique=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
+    birth_year = db.Column(db.Integer)
     u_articles = db.relationship("Article", back_populates="a_user" )          # creates list user.article
 
 
