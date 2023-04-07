@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
 
 
@@ -10,9 +10,12 @@ auth = Blueprint('auth', __name__, static_folder='../static')
 def login():
 
     if request.method == 'GET':         # then return template
-        return render_template(
-            'auth/login.html'
-        )
+        if current_user.is_authenticated:
+            return redirect(url_for('user.profile',pk=current_user.id))
+        else:
+            return render_template(
+                'auth/login.html'
+            )
 
     username = request.form.get('username')        # get data from form, fill dict
     password = request.form.get('password')        # get data from form, fill dic
@@ -31,6 +34,8 @@ def login():
     login_user(user)
     flash('Logged in successfully.')
     return redirect(url_for('user.user_list'))
+
+
 
 
 @auth.route('/logout')    # route registration

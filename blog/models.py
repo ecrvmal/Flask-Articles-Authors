@@ -14,6 +14,13 @@ class User(db.Model, UserMixin):
     birth_year = db.Column(db.Integer)
     u_articles = db.relationship("Article", back_populates="a_user" )          # creates list user.article
 
+    def __init__(self, username, first_name, last_name, email, birth_year, password):
+        self.username = username
+        self.first_name =first_name
+        self.last_name = last_name
+        self.email = email
+        self.birth_year = birth_year
+        self.password = password
 
 class Article(db.Model):
     __tablename__ = 'articles'  # optional
