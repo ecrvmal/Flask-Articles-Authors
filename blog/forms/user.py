@@ -10,7 +10,10 @@ class UserRegisterForm(FlaskForm):
                                    # validators.Length(),
                                    validators.Email(),
                                    ])
-    password = PasswordField('Password', [validators.DataRequired(), validators.EqualTo('confirm_password()')])
+    password = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm_password', message='Field must be equal to password'),
+    ])
     confirm_password = PasswordField('Confirm Password', [validators.DataRequired()])
     birth_year = IntegerField('Birth Year')
 

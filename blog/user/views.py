@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_required, current_user, login_user
+from sqlalchemy.exc import IntegrityError
+
 from blog.models import User
 from blog.extensions import db
 from werkzeug.exceptions import NotFound
@@ -27,7 +29,10 @@ def register():
     if request.method == 'POST' and form.validate_on_submit():
         if User.query.filter_by(email=form.email.data).count():             # User is model
             form.email.errors.append("email isn't uniq")
-            render_template('users/register.html', form=form)
+            return render_template('users/register.html', form=form)
+        if User.query.filter_by(username=form.username.data).count():             # User is model
+            form.username.errors.append("username isn't uniq")
+            return render_template('users/register.html', form=form)
 
         _user = User(
             username=form.username.data,
@@ -39,8 +44,12 @@ def register():
         )
 
         db.session.add(_user)
-        db.session.commit()
-        login_user(_user)
+        try:
+            db.session.commit()
+        except IntegrityError:
+            errors.append("Database Commit Error")
+        else:
+            login_user(_user)
 
     return render_template(
         'users/register.html',
