@@ -13,8 +13,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     birth_year = db.Column(db.Integer)
-    # u_articles = db.relationship("Article", back_populates="a_user" )          # creates list user.article
-
+    # u_articles = db.relationship("Article", back_populates="a_user")          # creates list user.article
     author = relationship('Author', uselist=False, back_populates='user')
 
     def __init__(self, username, first_name, last_name, email, birth_year, password):
@@ -27,12 +26,11 @@ class User(db.Model, UserMixin):
 
 
 class Author(db.Model):
-    __tablename__= "authors"
+    __tablename__ = "authors"
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
-    user = relationship('user', back_populates='author')
-
+    user = relationship('User', back_populates='author')
 
 
 class Article(db.Model):
@@ -40,8 +38,8 @@ class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
     text = db.Column(db.String)
-    a_user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    a_user = db.relationship('User', back_populates="u_articles")           # creates list article.user
+    # a_user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    # a_user = db.relationship('User', back_populates="u_articles")           # creates list article.user
 
 
 

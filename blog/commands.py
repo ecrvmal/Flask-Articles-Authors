@@ -9,7 +9,6 @@ from blog.extensions import db
 # def init_db():
 #     db.create_all()
 
-
 @click.command('create-init-user')
 def create_init_user():
     from blog.models import User
@@ -29,22 +28,34 @@ def create_user():
 
     with app.app_context():
         db.session.add(
-            User(username='user1', email='user1@mail.com', password=generate_password_hash('123'))
+            User(username='user1', email='user1@mail.com',
+                 first_name='user1', last_name='user1', birth_year=1991,
+                 password=generate_password_hash('123'))
         )
         db.session.add(
-            User(username='user2', email='user2@mail.com', password=generate_password_hash('123'))
+            User(username='user2', email='user2@mail.com',
+                 first_name='user2', last_name='user2', birth_year=1992,
+                 password=generate_password_hash('123'))
         )
         db.session.add(
-            User(username='user3', email='user3@mail.com', password=generate_password_hash('123'))
+            User(username='user3', email='user3@mail.com',
+                 first_name='user3', last_name='user3', birth_year=1993,
+                 password=generate_password_hash('123'))
         )
         db.session.add(
-            User(username='user4', email='user4@mail.com', password=generate_password_hash('123'))
+            User(username='user4', email='user4@mail.com',
+                 first_name='user4', last_name='user4', birth_year=1994,
+                 password=generate_password_hash('123'))
         )
         db.session.add(
-            User(username='user5', email='user5@mail.com', password=generate_password_hash('123'))
+            User(username='user5', email='user5@mail.com',
+                 first_name='user5', last_name='user5', birth_year=1995,
+                 password=generate_password_hash('123'))
         )
         db.session.add(
-            User(username='user6', email='username6@mail.com', password=generate_password_hash('123'))
+            User(username='user6', email='username6@mail.com',
+                 first_name='user6', last_name='user6', birth_year=1996,
+                 password=generate_password_hash('123'))
         )
         db.session.commit()
 

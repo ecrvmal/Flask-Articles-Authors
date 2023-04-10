@@ -32,10 +32,12 @@ def register_blueprints(app: Flask):
     from blog.auth.view import auth
     from blog.user.views import user
     from blog.report.views import report
+    from blog.author.views import author
 
     app.register_blueprint(user)
     app.register_blueprint(auth)
     app.register_blueprint(report)
+    app.register_blueprint(author)
 
 
 def register_commands(app: Flask):

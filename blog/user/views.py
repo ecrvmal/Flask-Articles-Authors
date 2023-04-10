@@ -17,49 +17,8 @@ user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static
 # USERS = {1: 'Alice', 2: 'John', 3: 'Mike'}
 
 
-@user.route('register', methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('user.profile', pk=current_user.id))
-
-    errors = []
-    form = UserRegisterForm(request.form)   # request.form - If there is a value for key,
-                                            # the form  will display the value after page reload
-                                            # this need for debugging
-    if request.method == 'POST' and form.validate_on_submit():
-        if User.query.filter_by(email=form.email.data).count():             # User is model
-            form.email.errors.append("email isn't uniq")
-            return render_template('users/register.html', form=form)
-        if User.query.filter_by(username=form.username.data).count():             # User is model
-            form.username.errors.append("username isn't uniq")
-            return render_template('users/register.html', form=form)
-
-        _user = User(
-            username=form.username.data,
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
-            email=form.email.data,
-            birth_year=form.birth_year.data,
-            password=generate_password_hash(form.password.data),
-        )
-
-        db.session.add(_user)
-        try:
-            db.session.commit()
-        except IntegrityError:
-            errors.append("Database Commit Error")
-        else:
-            login_user(_user)
-
-    return render_template(
-        'users/register.html',
-        form=form,
-        errors=errors
-    )
-
-
 @user.route('/')
-@login_required
+# @login_required
 def user_list():
     from blog.models import User
     users = User.query.all()
