@@ -1,5 +1,9 @@
+from datetime import datetime
+
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+
+
 from blog.app import db
 from flask_login import UserMixin
 
@@ -13,7 +17,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     birth_year = db.Column(db.Integer)
-    # u_articles = db.relationship("Article", back_populates="a_user")          # creates list user.article
+
     author = relationship('Author', uselist=False, back_populates='user')
 
     def __init__(self, username, first_name, last_name, email, birth_year, password):
@@ -31,15 +35,18 @@ class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', back_populates='author')
+    articles = db.relationship("Article", back_populates="author")          # creates list author.article
 
 
 class Article(db.Model):
     __tablename__ = 'articles'  # optional
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
-    text = db.Column(db.String)
-    # a_user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    # a_user = db.relationship('User', back_populates="u_articles")           # creates list article.user
+    text = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey("authors.id"), nullable=False)
+    author = db.relationship('Author', back_populates="articles")           # creates list article.user
 
 
 
