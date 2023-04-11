@@ -7,7 +7,11 @@
 <h3> list of articles </h3>
 
 {% for article in user.author.articles %}
-{{ article.title }}
+{# article.title #}
+
+<a href="{{ url_for('article.article_detail', pk=article.id) }}">
+    {{ article.title }} {{ article.author.user.first_name }} {{ article.author.user.last_name }}
+</a>
 {% endfor %}
 
 {% endblock %}

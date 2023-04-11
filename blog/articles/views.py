@@ -46,7 +46,7 @@ def create_article():
         db.session.add(_article)
         db.session.commit()
 
-        return redirect(url_for('article.article_detail', pk=_article.id))
+        return redirect(url_for('articles.article_detail', pk=_article.id))
 
     return render_template(
         'articles/create.html', form=form)
