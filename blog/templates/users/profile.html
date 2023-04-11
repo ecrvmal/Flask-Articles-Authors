@@ -4,4 +4,10 @@
 
 {% block body %}
 <h1> {{ user.id }} {{ user.username }}  {{ user.email }} {{ user.is_authenticated }}</h1>
+<h3> list of articles </h3>
+
+{% for article in user.author.articles %}
+{{ article.title }}
+{% endfor %}
+
 {% endblock %}
