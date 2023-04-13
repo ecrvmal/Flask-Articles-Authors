@@ -17,7 +17,7 @@ def create_app() -> Flask:
 
 def register_extensions(app):
     db.init_app(app)
-    migrate.init_app(app, db, compare_type=True)
+    migrate.init_app(app, db, compare_type=True, render_as_batch=True)
     csrf.init_app(app)
 
     login_manager.login_view = 'auth.login'
@@ -47,4 +47,5 @@ def register_commands(app: Flask):
     # app.cli.add_command(commands.init_db)
     app.cli.add_command(commands.create_init_user)
     app.cli.add_command(commands.create_user)
+    app.cli.add_command(commands.create_init_tags)
 

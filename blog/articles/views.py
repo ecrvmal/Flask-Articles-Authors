@@ -1,9 +1,10 @@
 from flask_login import login_required, current_user
 from flask import Blueprint, render_template, request, redirect, url_for
+from sqlalchemy.orm import joinedload
 
 from werkzeug.exceptions import NotFound
 
-from blog.models import Article, Author
+from blog.models import Article, Author, Tag
 from blog.forms.article import CreateArticleForm
 from blog.extensions import db
 
@@ -25,6 +26,7 @@ def article_list():
 @login_required
 def create_article_form():
     form = CreateArticleForm(request.form)
+    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by('name')]
     return render_template('articles/create.html', form=form)
 
 
@@ -32,6 +34,7 @@ def create_article_form():
 @login_required
 def create_article():
     form = CreateArticleForm(request.form)
+    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by('name')]
     if form.validate_on_submit():
         _article = Article(title=form.title.data.strip(), text=form.text.data)
 
@@ -43,10 +46,15 @@ def create_article():
             db.session.flush()
             _article.author_id = author.id
 
+        if form.tags.data:
+            selected_tags = Tag.query.filter(Tag.id.in_(form.tags.data))
+            for tag in selected_tags:
+                _article.tags.append(tag)
+
         db.session.add(_article)
         db.session.commit()
 
-        return redirect(url_for('articles.article_detail', pk=_article.id))
+        return redirect(url_for('article.article_detail', pk=_article.id))
 
     return render_template(
         'articles/create.html', form=form)
@@ -55,7 +63,10 @@ def create_article():
 @article.route('/<int:pk>/', methods=['GET'])
 # @login_required
 def article_detail(pk):
-    _article = Article.query.filter_by(id=pk).one_or_none()
+    _article = Article.query.filter_by(id=pk).\
+        options(joinedload(Article.tags)).\
+        one_or_none()
+
     if _article is None:
         raise NotFound
     return render_template(
