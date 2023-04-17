@@ -2,6 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import ForeignKey, Table
 from sqlalchemy.orm import relationship
+from werkzeug.security import check_password_hash
 
 
 from blog.app import db
@@ -24,9 +25,15 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
-    birth_year = db.Column(db.Integer)
+    is_staff = db.Column(db.Boolean, default=False)
 
     author = relationship('Author', uselist=False, back_populates='user')
+
+    def check_password(self, password: str) -> bool:
+        return check_password_hash(self.password, password)
+
+    def __str__(self):
+        return f'{self.user.id} ({self.user.username})'
 
     def __init__(self, username, first_name, last_name, email, birth_year, password):
         self.username = username
@@ -45,6 +52,9 @@ class Author(db.Model):
     user = relationship('User', back_populates='author')
     articles = db.relationship("Article", back_populates="author")          # creates list author.article
 
+    def __str__(self):
+        return self.user.username
+
 
 class Article(db.Model):
     __tablename__ = 'articles'  # optional
@@ -58,6 +68,9 @@ class Article(db.Model):
     author = db.relationship('Author', back_populates="articles")           # creates list article.user
     tags = db.relationship('Tag', secondary=article_tag_associations_table,  back_populates="articles")
 
+    def __str__(self):
+        return self.title
+
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -65,7 +78,8 @@ class Tag(db.Model):
     name = db.Column(db.String(255), nullable=False)
     articles = db.relationship("Article", secondary=article_tag_associations_table, back_populates="tags")
 
-
+    def __str__(self):
+        return self.name
 
 
 
