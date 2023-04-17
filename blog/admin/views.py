@@ -4,7 +4,7 @@ from flask_login import current_user
 from flask import redirect, url_for
 
 
-class CustomAdminView(ModelView):
+class CustomAdminView(ModelView):            # permission  to edit models (cane used per model)
 
     def create_blueprint(self, admin):
         blueprint = super().create_blueprint(admin)
@@ -23,7 +23,7 @@ class CustomAdminView(ModelView):
         return redirect(url_for('auth.login'))
 
 
-class CustomAdminIndexView(AdminIndexView):
+class CustomAdminIndexView(AdminIndexView):   # permission  get to admin page
 
     @expose()
     def index(self):
@@ -32,7 +32,8 @@ class CustomAdminIndexView(AdminIndexView):
         return super().index()
 
 
-class TagAdminView(CustomAdminView):
+class TagAdminView(CustomAdminView):        # if (CustomAdminView) - need auth + staff
+                                            # if (ModelView) - not need auth + staff
     column_searchable_list = ('name',)
     create_modal = True
     edit_modal = True
@@ -40,10 +41,11 @@ class TagAdminView(CustomAdminView):
 
 class ArticleAdminView(CustomAdminView):
     can_export = True
-    export_types = ('csv', 'xlsx')
+    export_types = ('csv', 'xlsx', )
     column_filters = ('author_id',)
-    form_columns =  ('title', 'text', 'author', 'tags')
-    column_editable_list = ('title', 'text', 'author', 'tags')
+    form_columns = ('title', 'text', 'author', 'tags', )
+    column_searchable_list =  ('title', 'text', )
+    column_editable_list = ('title', 'text', 'author', 'tags', )
 
 
 class UserAdminView(CustomAdminView):
