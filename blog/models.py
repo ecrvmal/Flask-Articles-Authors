@@ -24,7 +24,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
-    birth_year = db.Column(db.Integer)
+    # birth_year = db.Column(db.Integer)
+    is_staff = db.Column(db.Boolean, default=False)
 
     author = relationship('Author', uselist=False, back_populates='user')
 
