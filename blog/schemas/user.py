@@ -20,8 +20,8 @@ class UserSchema(Schema):
     author = Relationship(
         nested="AuthorSchema",
         attribute="author",
-        related_view="author_detail",
-        related_view_kwargs={"id": "<id>"},
+        related_url="author_detail",
+        related_url_kwargs={"id": "<id>"},
         schema="AuthorSchema",
         type_="author",
         many=False,

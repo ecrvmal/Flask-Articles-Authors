@@ -18,8 +18,8 @@ class ArticleSchema(Schema):
     author = Relationship(
         nested="AuthorSchema",
         attribute="author",
-        related_view="author_detail",
-        related_view_kwargs={"id": "<id>"},
+        related_url="author_detail",
+        related_url_kwargs={"id": "<id>"},
         schema="AuthorSchema",
         type_="author",
         many=False,
@@ -28,8 +28,8 @@ class ArticleSchema(Schema):
     tags = Relationship(
         nested="TagSchema",
         attribute="tags",
-        related_view="tag_detail",
-        related_view_kwargs={"id": "<id>"},
+        related_url="tag_detail",
+        related_url_kwargs={"id": "<id>"},
         schema="TagSchema",
         type_="tag",
         many=True,
