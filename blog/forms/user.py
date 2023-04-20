@@ -1,4 +1,4 @@
-from wtforms import StringField, validators, PasswordField, SubmitField, IntegerField
+from wtforms import StringField, validators, PasswordField, SubmitField, IntegerField, BooleanField
 from flask_wtf import FlaskForm
 
 
@@ -15,7 +15,7 @@ class UserRegisterForm(FlaskForm):
         validators.EqualTo('confirm_password', message='Field must be equal to password'),
     ])
     confirm_password = PasswordField('Confirm Password', [validators.DataRequired()])
-    birth_year = IntegerField('Birth Year')
+
 
     submit = SubmitField('Register')
 

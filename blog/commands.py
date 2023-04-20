@@ -29,32 +29,32 @@ def create_user():
     with app.app_context():
         db.session.add(
             User(username='user1', email='user1@mail.com',
-                 first_name='user1', last_name='user1', birth_year=1991,
+                 first_name='user1', last_name='user1',
                  password=generate_password_hash('123'))
         )
         db.session.add(
             User(username='user2', email='user2@mail.com',
-                 first_name='user2', last_name='user2', birth_year=1992,
+                 first_name='user2', last_name='user2',
                  password=generate_password_hash('123'))
         )
         db.session.add(
             User(username='user3', email='user3@mail.com',
-                 first_name='user3', last_name='user3', birth_year=1993,
+                 first_name='user3', last_name='user3',
                  password=generate_password_hash('123'))
         )
         db.session.add(
             User(username='user4', email='user4@mail.com',
-                 first_name='user4', last_name='user4', birth_year=1994,
+                 first_name='user4', last_name='user4',
                  password=generate_password_hash('123'))
         )
         db.session.add(
             User(username='user5', email='user5@mail.com',
-                 first_name='user5', last_name='user5', birth_year=1995,
+                 first_name='user5', last_name='user5',
                  password=generate_password_hash('123'))
         )
         db.session.add(
             User(username='user6', email='username6@mail.com',
-                 first_name='user6', last_name='user6', birth_year=1996,
+                 first_name='user6', last_name='user6',
                  password=generate_password_hash('123'))
         )
         db.session.commit()

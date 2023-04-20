@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
+from psycopg2 import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
+
+from blog.extensions import db
 from blog.forms.user import UserLoginForm, UserRegisterForm
 
 
@@ -74,7 +77,6 @@ def register():
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             email=form.email.data,
-            birth_year=form.birth_year.data,
             password=generate_password_hash(form.password.data),
         )
 
@@ -87,7 +89,7 @@ def register():
             login_user(_user)
 
     return render_template(
-        'users/register.html',
+        'auth/register.html',
         form=form,
         errors=errors
     )

@@ -1,4 +1,4 @@
-from combojsonapi.spec import ApiSpecPlugin
+
 from flask import Flask
 
 from blog import commands
