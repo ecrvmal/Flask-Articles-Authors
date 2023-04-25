@@ -9,7 +9,7 @@ Article list
     <div class="row justify-content-start">
         <div class="col-4">
             {# <a href="{{ url_for('report.report_list') }}"> reports </a>  #}
-            <h1>Articles</h1>
+            <h1>Articles ( Count from RPC) {{ count_articles }} </h1>
             <ul>
                 {% for article in articles %}
                 <li>  <a href="{{ url_for('article.article_detail',pk=article.id)}}">{{ article.id}} {{ article.title }}</a></li>
