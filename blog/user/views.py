@@ -20,6 +20,13 @@ user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static
 @user.route('/')
 # @login_required
 def user_list():
+    """
+    The user_list function is responsible for rendering the user list page.
+    It queries the database for all users and passes them to a template.
+
+    :return: A rendered template
+    :doc-author: Trelent
+    """
     from blog.models import User
     users = User.query.all()
     return render_template(
@@ -31,6 +38,15 @@ def user_list():
 @user.route('/<int:pk>')
 @login_required
 def profile(pk: int):
+    """
+    The profile function , when visited, will display the profile of a user.
+        Args:
+            pk (int): The primary key of the user to get.
+
+    :param pk: int: Specify the user id
+    :return: A redirect to the users page
+    :doc-author: Trelent
+    """
     from blog.models import User
 
     _user = User.query.filter_by(id=pk).one_or_none()

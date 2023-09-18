@@ -16,6 +16,10 @@ article = Blueprint('article', __name__, url_prefix='/article', static_folder='.
 @article.route('/', methods=['GET'])
 # @login_required
 def article_list():
+    """
+    the function returns list of articles
+    :return: to render template
+    """
     from blog.models import Article
     articles = Article.query.all()
     # call RPC method
@@ -33,6 +37,13 @@ def article_list():
 @article.route('/create', methods=['GET'])
 @login_required
 def create_article_form():
+    """
+    The create_article_form function renders the create.html template, which contains a form for creating an article.
+    The form is populated with choices from the Tag table in the database.
+    
+    :return: The rendered template articles/create
+    :doc-author: Trelent
+    """
     form = CreateArticleForm(request.form)
     form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by('name')]
     return render_template('articles/create.html', form=form)
@@ -41,6 +52,15 @@ def create_article_form():
 @article.route('/create', methods=['POST'])
 @login_required
 def create_article():
+    """
+    The create_article function is responsible for creating a new article.
+    It will first check if the user has submitted the form by checking if request.method == 'POST'.
+    If it is, then we create an instance of CreateArticleForm and pass in request.form as its argument.
+    We also set the choices attribute of our form to be a list of tuples containing all tags in our database ordered by name (line 4). This will allow us to use these tags when creating an article later on (see line 14). We then validate that this form was submitted correctly using WTForms' validate_on_submit method (line 5).
+
+    :return: A redirect to the article detail page
+    :doc-author: Trelent
+    """
     form = CreateArticleForm(request.form)
     form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by('name')]
     if form.validate_on_submit():
@@ -71,6 +91,16 @@ def create_article():
 @article.route('/<int:pk>/', methods=['GET'])
 # @login_required
 def article_detail(pk):
+    """
+    The article_detail function is responsible for displaying a single article.
+    It accepts an integer primary key (pk) as its only argument, and returns a
+    response containing the rendered template 'articles/details.html'. The response
+    contains the article object retrieved from the database using SQLAlchemy's query API.
+
+    :param pk: Identify the article to be deleted
+    :return: A rendered template
+    :doc-author: Trelent
+    """
     _article = Article.query.filter_by(id=pk).\
         options(joinedload(Article.tags)).\
         one_or_none()

@@ -11,6 +11,13 @@ from blog.extensions import db
 
 @click.command('create-init-user')
 def create_init_user():
+
+    """
+    The create_init_user function creates a user with the email name@example.com and password test123.
+
+    :return: The user object created
+    :doc-author: Trelent
+    """
     from blog.models import User
     from wsgi import app
 
@@ -23,6 +30,14 @@ def create_init_user():
 
 @click.command('create-user')
 def create_user():
+
+    """
+    The create_user function creates a user in the database.
+        It takes no arguments and returns nothing.
+
+    :return: A list of user objects
+    :doc-author: Trelent
+    """
     from wsgi import app
     from blog.models import User
 
@@ -61,6 +76,13 @@ def create_user():
 
 @click.command('create-init-tags')
 def create_init_tags():
+
+    """
+    The create_init_tags function creates a set of tags that can be used to tag blog posts.
+        The function is called by the initdb command.
+
+    :return: A string
+    """
     from blog.models import Tag
     from wsgi import app
 

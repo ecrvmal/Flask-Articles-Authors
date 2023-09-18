@@ -12,7 +12,14 @@ auth = Blueprint('auth', __name__, static_folder='../static')
 
 @auth.route('/login', methods=['POST', 'GET'])   # route registration
 def login():
+    """
+    The login function handles the logic for a user logging in.
+        If the request method is GET, then we return our login template.
+        If it's POST, then we validate our form and log them in if everything checks out.
 
+    :return: A template
+    :doc-author: Trelent
+    """
     if request.method == 'GET':         # then return template
         if current_user.is_authenticated:
             return redirect(url_for('user.profile', pk=current_user.id))
@@ -50,12 +57,27 @@ def login():
 @auth.route('/logout')    # route registration
 @login_required
 def logout():
+    """
+    The logout function logs the user out of their account.
+        It does this by calling the logout_user() function from Flask-Login, which removes all session data and cookies.
+
+    :return: A redirect to the login page
+    :doc-author: Trelent
+    """
     logout_user()
     return redirect(url_for('.login'))
 
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    The register function is responsible for handling the registration of new users.
+    It will render a form to the user, and then validate that form when it is submitted.
+    If validation passes, it will create a new User object and add it to the database.
+
+    :return: A redirect to the user profile
+    :doc-author: Trelent
+    """
     if current_user.is_authenticated:
         return redirect(url_for('user.profile', pk=current_user.id))
 

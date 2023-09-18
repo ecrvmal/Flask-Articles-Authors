@@ -9,6 +9,14 @@ from blog.api import init_api
 
 
 def create_app() -> Flask:
+
+    """
+    The create_app function is the application factory.
+    It takes as an argument the name of a configuration to be used for the app.
+    The config object from that module or class is then used to configure your Flask app.
+
+    :return: A flask object
+    """
     app = Flask(__name__)
     app.config.from_object('blog.config')
 
@@ -21,6 +29,13 @@ def create_app() -> Flask:
 
 
 def register_extensions(app):
+
+    """
+    The register_extensions function is responsible for initializing all of the Flask extensions that we will be using in our application.
+
+    :param app: Pass the flask app instance to the function
+    :return: The api object
+    """
     db.init_app(app)
     migrate.init_app(app, db, compare_type=True, render_as_batch=True)
     csrf.init_app(app)
@@ -79,6 +94,14 @@ def register_extensions(app):
 
 
 def register_blueprints(app: Flask):
+
+    """
+    The register_blueprints function is a helper function that allows us to register all of our blueprints in one place.
+    This makes it easier for us to keep track of the blueprints we have registered and where they are located.
+
+    :param app: Flask: Pass the flask application object to the function
+    :return: None
+    """
     from blog.auth.view import auth
     from blog.user.views import user
     from blog.report.views import report
@@ -95,8 +118,15 @@ def register_blueprints(app: Flask):
 
 
 def register_commands(app: Flask):
+
     # the there is migrations, the init-db don't need
     # app.cli.add_command(commands.init_db)
+    """
+    The register_commands function registers the CLI commands with Flask.
+
+    :param app: Flask: Register the commands with the flask app
+    :return: None
+    """
     app.cli.add_command(commands.create_init_user)
     app.cli.add_command(commands.create_user)
     app.cli.add_command(commands.create_init_tags)
